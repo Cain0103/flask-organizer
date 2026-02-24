@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <form method="post" style="display: grid; grid-template-columns: 2fr 1fr auto; gap: 10px;">
+        <input type="text" name="product" placeholder="Продукт (Хлеб)" required style="margin:0;">
+        <input type="text" name="amount" placeholder="Кол-во (1 шт)" required style="margin:0;">
+        <button type="submit" style="width: auto;">+</button>
+    </form>
+</div>
+<div class="item-list">
+    {% for item in items %}
+        <div class="item">
+            <div style="display: flex; align-items: center;">
+                <a href="{{ url_for('shopping_toggle', id=item.id) }}" style="text-decoration: none; margin-right: 10px; font-size: 1.2rem;">
+                    {{ '✅' if item.is_bought else '⬜' }}
+                </a>
+                <span class="{{ 'done' if item.is_bought }}">
+                    <b>{{ item.product }}</b> ({{ item.amount }})
+                </span>
+            </div>
+            <a href="{{ url_for('delete', category='shopping', id=item.id) }}" class="delete-btn">×</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

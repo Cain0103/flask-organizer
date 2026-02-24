@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <form action="" method="get" style="margin-bottom: 20px;">
+        <input type="text" name="q" value="{{ search }}" placeholder="🔍 Поиск по имени..." onchange="this.form.submit()">
+    </form>
+    
+    <hr style="border: 0; border-top: 1px solid var(--border); margin: 15px 0;">
+
+    <form method="post" style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px;">
+        <input type="text" name="name" placeholder="Имя" required style="margin:0;">
+        <input type="text" name="phone" placeholder="Номер" required style="margin:0;">
+        <button type="submit" style="width: auto;">+</button>
+    </form>
+</div>
+
+<div class="item-list">
+    {% for item in items %}
+        <div class="item">
+            <div>
+                <div style="font-weight: bold;">{{ item.name }}</div>
+                <div style="color: var(--accent);">{{ item.phone }}</div>
+            </div>
+            <a href="{{ url_for('delete', category='phonebook', id=item.id) }}" class="delete-btn">×</a>
+        </div>
+    {% else %}
+        <div class="item">Контакты не найдены.</div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <form method="post" style="display: flex; gap: 10px;">
+        <input type="text" name="content" placeholder="Новая заметка..." required style="margin:0;">
+        <button type="submit" style="width: auto;">+</button>
+    </form>
+</div>
+<div class="item-list">
+    {% for item in items %}
+        <div class="item">
+            <span>{{ item.content }}</span>
+            <a href="{{ url_for('delete', category='notes', id=item.id) }}" class="delete-btn">×</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

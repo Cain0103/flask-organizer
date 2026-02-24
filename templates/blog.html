@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <form method="post">
+        <input type="text" name="title" placeholder="Заголовок поста" required>
+        <textarea name="text" rows="3" placeholder="О чем вы думаете сегодня?" required></textarea>
+        <button type="submit">Опубликовать</button>
+    </form>
+</div>
+{% for item in items %}
+    <div class="card" style="position: relative;">
+        <h3 style="margin-top: 0;">{{ item.title }}</h3>
+        <p style="white-space: pre-wrap;">{{ item.text }}</p>
+        <small style="color: gray;">{{ item.date }}</small>
+        <a href="{{ url_for('delete', category='blog', id=item.id) }}" class="delete-btn" style="position: absolute; top: 20px; right: 20px;">Удалить</a>
+    </div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <form method="post" style="display: grid; gap: 10px;">
+        <input type="text" name="title" placeholder="Название фильма" required style="margin:0;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+            <input type="text" name="genre" placeholder="Жанр" style="margin:0;">
+            <input type="number" name="year" placeholder="Год" style="margin:0;">
+            <input type="number" name="rating" placeholder="Оценка (1-10)" min="1" max="10" required style="margin:0;">
+        </div>
+        <button type="submit">Добавить фильм</button>
+    </form>
+</div>
+
+<div class="item-list">
+    {% for item in items %}
+        <div class="item">
+            <div>
+                <strong style="font-size: 1.1em;">{{ item.title }}</strong>
+                <span style="background: var(--accent); color: white; padding: 2px 6px; border-radius: 4px; font-size: 0.8em; margin-left: 10px;">
+                    ★ {{ item.rating }}
+                </span>
+                <div style="font-size: 0.9em; opacity: 0.8;">{{ item.year }}, {{ item.genre }}</div>
+            </div>
+            <a href="{{ url_for('delete', category='movies', id=item.id) }}" class="delete-btn">×</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
